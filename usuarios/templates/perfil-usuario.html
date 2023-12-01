@@ -1,0 +1,52 @@
+{% extends 'index.html' %}
+{% load static %}
+{% load socialaccount %}
+{% providers_media_js %}
+{% load crispy_forms_tags %}
+
+{% block secao %}
+{% if user.is_authenticated %}
+    <div class="hamburger">
+        <button><i class="bi bi-hand-index-thumb"></i> perfil</button>
+    </div>
+    <div class="perfil-lateral">
+        <div class="img-perfil">
+            <img src="{{ user.profile.imagemPerfil.url }}" alt="">
+            <p>{{ user }}</p>
+            <p class="email-perfil">{{ user.email }}</p>
+            <br>
+            <br>
+            <div class="perfil-opcoes">
+                <a href="{% url 'index' %}"><i class="bi bi-search"></i> Buscar veiculos</a>
+                <a href="{% url 'anuncio-carro' %}"><i class="bi bi-megaphone"></i> Meus anuncios/carros</a>
+                <a href="{% url 'anuncio-moto' %}"><i class="bi bi-megaphone"></i> Meus anuncios/motos</a>
+                <a href="{% url 'alterar_senha' %}"><i class="bi bi-key-fill"></i> Redefinir senha</a>
+                <a href="{% url 'logout' %}"><i class="bi bi-box-arrow-right"></i> Sair</a>
+            </div>
+        </div>
+    </div>
+    <div class="perfil-usuario">
+        <div class="perfil-user">
+            <div class="formularios">
+                <form action="" method="POST" enctype="multipart/form-data">
+                
+                    {% csrf_token %}
+                
+                    {{ form|crispy }}
+                    <br>
+                    <div class="icone-perfil">
+                        <i class="bi bi-file-earmark-plus"></i>
+                    </div>
+                    <button type="submit" class="alterar">Salvar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% else %}
+<div class="erro">
+    <h1>ERRO!</h1>
+    <h2>Necessario estar logado para acessar esta pagina</h2>
+    <a href="{% url 'login' %}">Faça login</a>
+</div>
+{% endif %}
+{% endblock %}
