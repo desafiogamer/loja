@@ -1,0 +1,102 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block secao %}
+
+<div class="imgs-pegout">
+    <div class="slider-content">
+        <input type="radio" name="btn-radio" id="radio1">
+        <input type="radio" name="btn-radio" id="radio2">
+        <input type="radio" name="btn-radio" id="radio3">
+    
+        <div class="slider-box primeiro">
+            <img src="{% static 'img/amarok-lado.jpg' %}" alt="girl">
+        </div>
+    
+        <div class="slider-box">
+            <img src="{% static 'img/amarok-atras.jpg' %}" alt="girl">
+        </div>
+    
+        <div class="slider-box">
+            <img src="{% static 'img/amarok-frente.jpg' %}" alt="girl">
+        </div>
+    
+        <div class="nav-auto">
+            <div class="auto-btn1"></div>
+            <div class="auto-btn2"></div>
+            <div class="auto-btn3"></div>
+        </div>
+    
+        <div class="nav-manual">
+            <label for="radio1" class="manual-btn"></label>
+            <label for="radio2" class="manual-btn"></label>
+            <label for="radio3" class="manual-btn"></label>
+        </div>
+    </div>
+    
+    <div class="informacoes-container">
+
+        <div class="informacoes-box">
+            <div class="tille-car">
+                <h1>VOLKSWAGEN <span> AMAROK</span></h1>
+                <p>2.0 HIGHLINE 4X4 CD 16V TURBO INTERCOOLER DIESEL 4P AUTOMÁTICO</p>
+            </div>
+            <div class="informacoes-content">
+                <div class="card-car">
+                    <p>Cidade</p>
+                    <span>Sao paulo - SP</span>
+                </div>
+
+                <div class="card-car">
+                    <p>Ano</p>
+                    <span>2017/2017</span>
+                </div>
+
+                <div class="card-car">
+                    <p>Km</p>
+                    <span>80.968 </span>
+                </div>
+
+                <div class="card-car">
+                    <p>Combustivel</p><span>Diesel</span>
+                </div>
+                <div class="card-car">
+                    <p>IPVA pago</p>
+                    <span>sim</span>
+                </div>
+                <div class="card-car">
+                    <p>Cambio</p>
+                    <span>Automatico</span>
+                </div>
+                <div class="card-car">
+                    <p>Cor</p>
+                    <span>Branca</span>
+                </div>
+                <div class="card-car">
+                    <p>Aceita troca</p>
+                    <span>sim</span>
+                </div>
+            </div>
+        </div>
+        <div class="informacoes-box2">
+            <h1>R$ 145.900</h1>
+            <span>Envie mensagem para o vendedor</span>
+
+            <form action="">
+                <div class="box2-inputs">
+                    {% if user.is_authenticated %}
+                    <input type="text" placeholder="Nome*" required>
+                    <input type="text" placeholder="E-mail*" required>
+                    <input type="text" placeholder="Telefone*" required>
+                    <textarea cols="30" rows="4" placeholder="Mensagem*" required></textarea>
+                    <button type="submit">Enviar</button>
+                    {% else %}
+                    <h1>Faça login para enviar a mensagem <a href="{% url 'login' %}">Login</a></h1>
+                    {% endif %}
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

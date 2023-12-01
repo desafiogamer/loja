@@ -1,0 +1,81 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block secao %}
+{% if user.is_authenticated %}
+<div class="imgs-pegout">
+    <div class="slider-content">
+        <div class="slider-box primeiro">
+            <img src="{{ obj.carro.url }}" alt="girl">
+        </div>
+    </div>
+    
+    <div class="informacoes-container">
+
+        <div class="informacoes-box">
+            <div class="tille-car">
+                <h1>{{ obj.modelo }}</h1>
+                <p>{{ obj.descricao }}</p>
+            </div>
+
+            <div class="informacoes-content">
+                <div class="card-car">
+                    <p>Nome do vendedor</p>
+                    <span>{{ obj.usuario }}</span>
+                </div>
+
+                <div class="card-car">
+                    <p>Cidade</p>
+                    <span>{{ obj.cidade }}</span>
+                </div>
+
+                <div class="card-car">
+                    <p>Ano</p>
+                    <span>{{ obj.data }}</span>
+                </div>
+
+                <div class="card-car">
+                    <p>Km</p>
+                    <span>{{ obj.km }}</span>
+                </div>
+
+                <div class="card-car">
+                    <p>Combustivel</p>
+                    <span>{{ obj.combustivel }}</span>
+                </div>
+                <div class="card-car">
+                    <p>IPVA pago</p>
+                    <span>{{ obj.ipva }}</span>
+                </div>
+                <div class="card-car">
+                    <p>Cambio</p>
+                    <span>{{ obj.cambio }}</span>
+                </div>
+                <div class="card-car">
+                    <p>Cor</p>
+                    <span>{{ obj.cor }}</span>
+                </div>
+                <div class="card-car">
+                    <p>Aceita troca</p>
+                    <span>{{ obj.troca }}</span>
+                </div>
+            </div>
+        </div>
+        <div class="informacoes-box2">
+            <h1>R$ {{ obj.preco }}</h1>
+            <span>Envie mensagem para o vendedor</span>
+
+            <form action="">
+                <div class="box2-inputs">
+                    <input type="text" placeholder="Nome*" required>
+                    <input type="text" placeholder="E-mail*" required>
+                    <input type="text" placeholder="Telefone*" required>
+                    <textarea cols="30" rows="4" placeholder="Mensagem*" required></textarea>
+                    <button type="submit">Enviar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

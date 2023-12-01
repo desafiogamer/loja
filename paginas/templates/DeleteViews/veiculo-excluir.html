@@ -1,0 +1,32 @@
+{% extends 'index.html' %}
+{% load static %}
+
+
+{% block secao %}
+{% if user.is_authenticated %}
+<div class="password">
+    <div class="password-box">
+        <h1>Excluir <i class="bi bi-trash"></i></h1>
+        <form class="fomulario-excluir" action="" method="POST">
+            <p>
+                Deseja excluir o anuncio: <b>{{ object }}</b>?
+            </p>
+        
+            {% csrf_token %}
+        
+            {{ form.as_p }}
+        
+            <button type="submit">Excluir</button>
+        </form>
+    </div>
+</div>
+{% else %}
+<div class="password">
+    <div class="password-box">
+        <h1>ERRO!</h1>
+        <h2>Necessario estar logado para acessar esta pagina</h2>
+        <a href="{% url 'login' %}">Faça login</a>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

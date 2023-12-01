@@ -1,0 +1,57 @@
+{% extends 'index.html' %}
+{% load static %}
+
+
+{% block secao %}
+{% if user.is_authenticated %}
+    <div class="carro-content">
+        <div class="carro-espaco">
+            <ul id="lista-nao-ordenada" class="lista-nao-ordenada">
+                {% for atividade in object_list %}
+                <li class="cars">
+                    <div class="carro-box">
+                        <div class="container-slider">
+                            <button class="prev-button"><img src="{% static 'img/arrow.png' %}" alt="prev-button"></button>
+                            <div class="container-images">
+                                <img src="{{ atividade.carro.url }}" alt="girl" class="slider-all on">
+                            </div>
+                            <button class="next-button"><img src="{% static 'img/arrow.png' %}" alt="next-button"></button>
+                        </div>
+                        <div class="lista-nome">
+                            <h1 class="item-name">{{ atividade.modelo }}</h1>
+                        </div>
+                        <p class="descricao">{{ atividade.descricao }}</p>
+                
+                        <h2 id="preco1">R$ {{ atividade.preco }}</h2>
+                        <p id="ano">{{ atividade.data }} <span>{{ atividade.km }} Km</span></p>
+                        <div class="botao"><a href="{% url 'detail' atividade.id %}">Ver parcelas</a></div>
+                        <p id="nome-vendedor">Nome do vendedor: {{ atividade.usuario }}</p>
+                        <div class="updates-anuncios">
+                            <a href="{% url 'editar-carro' atividade.pk %}">Editar anuncio</a>
+                            <a href="{% url 'excluir-carro' atividade.pk %}">Excluir anuncio</a>
+                        </div>
+                        <div class="localizacao">
+                            <i class="bi bi-geo-alt"></i>
+                            <p id="city">{{ user.profile.cidade }}</p>
+                
+                            <div id="favorito"><i class="bi bi-heart"></i></div>
+                        </div>
+                    </div>
+                </li>
+                {% empty %}
+                <div class="nenhum-anuncio">
+                    <h1>Nenhum anuncio</h1>
+                </div>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% else %}
+<div class="password">
+    <div class="password-box">
+        <h1>ERRO!</h1>
+        <h2>Necessario estar logado para acessar esta pagina</h2>
+        <a href="{% url 'login' %}">Faça login</a>
+    </div>
+{% endif %}
+{% endblock %}

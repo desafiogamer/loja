@@ -1,0 +1,438 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block link-a %}
+<a href="{% url 'index' %}">Carro</a>
+<a class="link-carro" href="{% url 'motos' %}">Moto</a>
+{% endblock %}
+
+{% block paginas %}
+<p>home > Motos</p>
+{% endblock %}
+
+{% block titulo %}
+<h1>Motos, seminovas e novas em todo o Brasil</h1>
+{% endblock %}
+
+{% block titulo-filtro %}
+<h1>Marca da moto</h1>
+{% endblock %}
+
+{% block marca %}
+<div class="marca-box">
+    <a class="lista list1" href="#" filterObjects="all"><img class="icone-moto" src="https://api.iconify.design/material-symbols:motorcycle.svg"></a>
+    <p>Todos</p>
+</div>
+
+<div class="marca-box">
+    <a class="lista list2" href="#" filterObjects="BMW"><img src="{% static 'img/marcas/bmw.png' %}" alt=""></a>
+    <p>BMW</p>
+</div>
+
+<div class="marca-box">
+    <a class="lista list3" href="#" filterObjects="Kawasaki"><img src="{% static 'img/marcas/kawasaki.png' %}" alt=""></a>
+    <p>KAWASAKI</p>
+</div>
+
+<div class="marca-box">
+    <a class="lista list4" href="#" filterObjects="Suzuki"><img src="{% static 'img/marcas/suzuki.png' %}" alt=""></a>
+    <p>SUZUKI</p>
+</div>
+
+<div class="marca-box">
+    <a class="lista list5" href="#" filterObjects="Honda"><img src="{% static 'img/marcas/honda.png' %}" alt=""></a>
+    <p>HONDA</p>
+</div>
+
+<div class="marca-box">
+    <a class="lista list6" href="#" filterObjects="Yamaha"><img src="{% static 'img/marcas/yamaha.png' %}" alt=""></a>
+    <p>YAMAHA</p>
+</div>
+
+<div class="marca-box">
+    <a class="lista list7" href="#" filterObjects="Ducati"><img src="{% static 'img/marcas/ducati.png' %}" alt=""></a>
+    <p>DUCATI</p>
+</div>
+
+<div class="marca-box">
+    <a class="lista list8" href="#" filterObjects="Bimota"><img src="{% static 'img/marcas/bimota.jpg' %}" width="40px" height="40px" alt=""></a>
+    <p>BIMOTA</p>
+</div>
+
+<div class="marca-box">
+    <a class="lista list9" href="#" filterObjects="Dafra"><img src="{% static 'img/marcas/DAFRA.png' %}" width="40px"height="40px" alt=""></a>
+    <p>DAFRA</p>
+</div>
+
+{% endblock %}
+
+{% block input %}
+<input id="inputBusca" type="text" placeholder="Digite modelo da moto" onkeyup="filtrar()">
+{% endblock %}
+
+{% block veiculo %}
+<ul id="lista-nao-ordenada" class="lista-nao-ordenada">
+    {% for atividade in object_list %}
+    <li class="cars {{ atividade.marca }} {{ atividade.condicao }} {{ atividade.precoo }}">
+        <div class="carro-box">
+            <div class="container-slider">
+                <button class="prev-button"><img src="{% static 'img/arrow.png' %}" alt="prev-button"></button>
+                <div class="container-images">
+                    <img src="{{ atividade.moto.url }}" alt="girl" class="slider-all on">
+                </div>
+                <button class="next-button"><img src="{% static 'img/arrow.png' %}" alt="next-button"></button>
+            </div>
+            <div class="lista-nome">
+                <h1 class="item-name">{{ atividade.modelo }}</h1>
+            </div>
+            <p class="descricao">{{ atividade.descricao }}</p>
+    
+            <h2 id="preco1">R$ {{ atividade.preco }}</h2>
+            <p id="ano">{{ atividade.data }} <span>{{ atividade.km }} Km</span></p>
+            <p id="name-user">Nome do vendedor: {{ atividade.usuario }}</p>
+            <div class="botao"><a href="{% url 'detail_moto' atividade.id %}">Ver parcelas</a></div>
+
+            <div class="localizacao">
+                <i class="bi bi-geo-alt"></i>
+                <p id="city">{{ atividade.cidade }}</p>
+            </div>
+        </div>
+    </li>
+    {% endfor %}
+    <li class="cars Dafra Novos LowToHigh">
+        <div class="carro-box">
+            <div class="container-slider">
+                <button class="prev-button" id="prev-buttonPanamera"><img src="{% static 'img/arrow.png' %}" alt="prev-button"></button>
+                <div class="container-images">
+                    <img src="{% static 'img/dafra-frente.jpg' %}" alt="girl"class="sliderPanamera slider-all on">
+                    <img src="{% static 'img/dafra-atras.jpg' %}" alt="girl" class="sliderPanamera slider-all">
+                </div>
+                <button class="next-button" id="next-buttonPanamera"><img src="{% static 'img/arrow.png' %}" alt="next-button"></button>
+            </div>
+            <div class="lista-nome">
+                <h1 class="item-name">DAFRA CRUISYM 150</h1>
+            </div>
+            <br>
+            <br>
+            <h2 id="preco8">R$ 14.990</h2>
+            <p id="ano">2023/2024<span>0 Km</span></p>
+    
+            <div class="botao"><a href="{% url 'Dafra' %}">Ver parcelas</a></div>
+    
+            <div class="localizacao">
+                <i class="bi bi-geo-alt"></i>
+                <p id="city">Santo Andre - SP</p>
+            </div>
+        </div>
+    </li>
+
+    <li class="cars BMW SemiNovos LowToHigh">
+        <div class="carro-box">
+            <div class="container-slider">
+                <button class="prev-button" id="prev-button"><img src="{% static 'img/arrow.png' %}" alt="prev-button"></button>
+                <div class="container-images">
+                    <img src="{% static 'img/moto-lado.jpg' %}" alt="girl" class="slider slider-all on">
+                    <img src="{% static 'img/frente-moto.jpg' %}" alt="girl" class="slider slider-all">
+                </div>
+                <button class="next-button" id="next-button"><img src="{% static 'img/arrow.png' %}" alt="next-button"></button>
+            </div>
+            <div class="lista-nome">
+                <h1 class="item-name">BMW G 310 R</h1>
+            </div>
+            <br>
+            <br>
+            <h2 id="preço">R$ 28.900</h2>
+            <p id="ano">2020/2020 <span>16.328 Km</span></p>
+
+            <div class="botao"><a href="{% url 'BMW' %}">Ver parcelas</a></div>
+
+            <div class="localizacao">
+                <i class="bi bi-geo-alt"></i>
+                <p id="city">Brasilia - DF</p>
+            </div>
+        </div>
+    </li>
+
+    <li class="cars BMW Usados HighToLow">
+        <div class="carro-box">
+            <div class="container-slider">
+                <button class="prev-button" id="prev-buttonn"><img src="{% static 'img/arrow.png' %}"
+                        alt="prev-button"></button>
+                <div class="container-images">
+                    <img src="{% static 'img/bmw-frente.jpg' %}" alt="girl" class="slider1 slider-all on">
+                    <img src="{% static 'img/bmw-atras.jpg' %}" alt="girl" class="slider1 slider-all">
+                </div>
+                <button class="next-button" id="next-buttonn"><img src="{% static 'img/arrow.png' %}"
+                        alt="next-button"></button>
+            </div>
+            <div class="lista-nome">
+                <h1 class="item-name">BMW G 310 GS</h1>
+            </div>
+            <br>
+            <br>
+            <h2 id="preço">R$ 27.890</h2>
+            <p id="ano">2019/2019 <span>42.343 Km</span></p>
+
+            <div class="botao"><a href="{% url 'GS' %}">Ver parcelas</a></div>
+
+            <div class="localizacao">
+                <i class="bi bi-geo-alt"></i>
+                <p id="city">Piracicaba - SP</p>
+            </div>
+        </div>
+    </li>
+    <li class="cars Kawasaki Usados LowToHigh">
+        <div class="carro-box">
+            <div class="container-slider">
+                <button class="prev-button" id="prev-buttonTesla"><img src="{% static 'img/arrow.png' %}"
+                        alt="prev-button"></button>
+                <div class="container-images">
+                    <img src="{% static 'img/kawasaki-frente.jpg' %}" alt="girl" class="sliderTesla slider-all on">
+                    <img src="{% static 'img/kawasaki-atras.jpg' %}" alt="girl" class="sliderTesla slider-all">
+                </div>
+                <button class="next-button" id="next-buttonTesla"><img src="{% static 'img/arrow.png' %}"
+                        alt="next-button"></button>
+            </div>
+            <div class="lista-nome">
+                <h1 class="item-name">KAWASAKI NINJA 300</h1>
+            </div>
+            <br>
+            <br>
+            <h2 id="preço">R$ 16.990</h2>
+            <p id="ano">2013/2014 <span>58.900 km</span></p>
+
+            <div class="botao"><a href="{% url 'Kawasaki' %}">Ver parcelas</a></div>
+
+            <div class="localizacao">
+                <i class="bi bi-geo-alt"></i>
+                <p  id="city">Campinas - SP</p>
+            </div>
+        </div>
+    </li>
+
+    <li class="cars Kawasaki Novos HighToLow">
+        <div class="carro-box">
+            <div class="container-slider">
+                <button class="prev-button" id="prev-buttonVolkswagen"><img src="{% static 'img/arrow.png' %}" alt="prev-button"></button>
+                <div class="container-images">
+                    <img src="{% static 'img/kawasaki-z400-frente.jpg' %}" alt="girl" class="sliderVolkswagen slider-all on">
+                    <img src="{% static 'img/kawasaki-z400-atras.jpg' %}" alt="girl" class="sliderVolkswagen slider-all o">
+                </div>
+                <button class="next-button" id="next-buttonVolkswagen"><img src="{% static 'img/arrow.png' %}" alt="next-button"></button>
+            </div>
+            <div class="lista-nome">
+                <h1 class="item-name">KAWASAKI Z400</h1>
+            </div>
+            <br>
+            <br>
+            <h2 id="preco8">R$ 34.810</h2>
+            <p id="ano">2022/2023<span>0 Km</span></p>
+    
+            <div class="botao"><a href="{% url 'Z400' %}">Ver parcelas</a></div>
+    
+            <div class="localizacao">
+                <i class="bi bi-geo-alt"></i>
+                <p id="city">Jundiai - SP</p>
+            </div>
+        </div>
+    </li>
+
+    <li class="cars Suzuki Usados HighToLow">
+        <div class="carro-box">
+            <div class="container-slider">
+                <button class="prev-button" id="prev-buttonPorsche"><img src="{% static 'img/arrow.png' %}"
+                        alt="prev-button"></button>
+                <div class="container-images">
+                    <img src="{% static 'img/suzuki-frente.jpg' %}" alt="girl" class="sliderPorsche slider-all on">
+                    <img src="{% static 'img/suzuki-lado.jpg' %}" alt="girl" class="sliderPorsche slider-all">
+                </div>
+                <button class="next-button" id="next-buttonPorsche"><img src="{% static 'img/arrow.png' %}"
+                        alt="next-button"></button>
+            </div>
+            <div class="lista-nome">
+                <h1 class="item-name">SUZUKI GSX 650 F</h1>
+            </div>
+            <br>
+            <br>
+            <h2 id="preço">R$ 34.900</h2>
+            <p id="ano">2013/2014 <span>70.050 Km</span></p>
+
+            <div class="botao"><a href="{% url 'Suzuki' %}">Ver parcelas</a></div>
+
+            <div class="localizacao">
+                <i class="bi bi-geo-alt"></i>
+                <p id="city">Sao Jose - SC</p>>
+            </div>
+        </div>
+    </li>
+
+    <li class="cars Honda Usados LowToHigh">
+        <div class="carro-box">
+            <div class="container-slider">
+                <button class="prev-button" id="prev-buttonChevrolet"><img src="{% static 'img/arrow.png' %}"
+                        alt="prev-button"></button>
+                <div class="container-images">
+                    <img src="{% static 'img/honda-frente.jpg' %}" alt="girl" class="sliderChevrolet slider-all on">
+                    <img src="{% static 'img/honda-atras.jpg' %}" alt="girl" class="sliderChevrolet slider-all">
+                </div>
+                <button class="next-button" id="next-buttonChevrolet"><img src="{% static 'img/arrow.png' %}"
+                        alt="next-button"></button>
+            </div>
+            <div class="lista-nome">
+                <h1 class="item-name">HONDA CBX 250 TWISTER</h1>
+            </div>
+            <br>
+            <br>
+            <h2 id="preço">R$ 9.500</h2>
+            <p id="ano">2007/2007 <span>69.102 Km</span></p>
+
+            <div class="botao"><a href="{% url 'Honda' %}">Ver parcelas</a></div>
+
+            <div class="localizacao">
+                <i class="bi bi-geo-alt"></i>
+                <p id="city">Sao Paulo - SP</p>
+            </div>
+        </div>
+    </li>
+
+    <li class="cars Yamaha SemiNovos HighToLow">
+        <div class="carro-box">
+            <div class="container-slider">
+                <button class="prev-button" id="prev-buttonLamborguini"><img src="{% static 'img/arrow.png' %}"
+                        alt="prev-button"></button>
+                <div class="container-images">
+                    <img src="{% static 'img/yamaha-lado.jpg' %}" alt="girl" class="sliderLamborguini slider-all on">
+                    <img src="{% static 'img/yamaha-atras.jpg' %}" alt="girl" class="sliderLamborguini slider-all">
+                </div>
+                <button class="next-button" id="next-buttonLamborguini"><img src="{% static 'img/arrow.png' %}"
+                        alt="next-button"></button>
+            </div>
+            <div class="lista-nome">
+                <h1 class="item-name">YAMAHA MT-09</h1>
+            </div>
+            <br>
+            <br>
+            <h2 id="preço">R$ 49.000</h2>
+            <p id="ano">2018/2018 <span>15.554 km</span></p>
+
+            <div class="botao"><a href="{% url 'Yamaha' %}">Ver parcelas</a></div>
+
+            <div class="localizacao">
+                <i class="bi bi-geo-alt"></i>
+                <p id="city">Sao Paulo - SP</p>
+            </div>
+        </div>
+    </li>
+
+    <li class="cars Yamaha Novos LowToHigh">
+        <div class="carro-box">
+            <div class="container-slider">
+                <button class="prev-button" id="prev-buttonChevrolett"><img src="{% static 'img/arrow.png' %}" alt="prev-button"></button>
+                <div class="container-images">
+                    <img src="{% static 'img/yamaha-factor-frente.jpg' %}" alt="girl" class="sliderChevrolett slider-all on">
+                    <img src="{% static 'img/yamaha-factor-atras.jpg' %}" alt="girl" class="sliderChevrolett slider-all">
+                </div>
+                <button class="next-button" id="next-buttonChevrolett"><img src="{% static 'img/arrow.png' %}" alt="next-button"></button>
+            </div>
+            <div class="lista-nome">
+                <h1 class="item-name">YAMAHA FACTOR YBR 125I ED</h1>
+            </div>
+            <br>
+            <h2 id="preco8">R$ 15.000</h2>
+            <p id="ano">2023/2024<span>0 Km</span></p>
+    
+            <div class="botao"><a href="{% url 'Factor' %}">Ver parcelas</a></div>
+    
+            <div class="localizacao">
+                <i class="bi bi-geo-alt"></i>
+                <p id="city">Sao Paulo - SP</p>
+            </div>
+        </div>
+    </li>
+
+    <li class="cars Ducati SemiNovos HighToLow">
+        <div class="carro-box">
+            <div class="container-slider">
+                <button class="prev-button" id="prev-buttonAmarok"><img src="{% static 'img/arrow.png' %}"
+                        alt="prev-button"></button>
+                <div class="container-images">
+                    <img src="{% static 'img/ducati-frente.jpg' %}" alt="girl" class="sliderAmarok slider-all on">
+                    <img src="{% static 'img/ducati-lado.jpg' %}" alt="girl" class="sliderAmarok slider-all">
+                </div>
+                <button class="next-button" id="next-buttonAmarok"><img src="{% static 'img/arrow.png' %}"
+                        alt="next-button"></button>
+            </div>
+            <div class="lista-nome">
+                <h1 class="item-name">DUCATI MONSTER 797</h1>
+            </div>
+            <br>
+            <br>
+            <h2 id="preço">R$ 41.900</h2>
+            <p id="ano">2019/2019 <span>19.000 Km</span></p>
+
+            <div class="botao"><a href="{% url 'Ducati' %}">Ver parcelas</a></div>
+
+            <div class="localizacao">
+                <i class="bi bi-geo-alt"></i>
+                <p id="city">Santos - SP</p>
+            </div>
+        </div>
+    </li>
+
+    <li class="cars Bimota SemiNovos HighToLow">
+        <div class="carro-box">
+            <div class="container-slider">
+                <button class="prev-button" id="prev-buttonFerrari"><img src="{% static 'img/arrow.png' %}"
+                        alt="prev-button"></button>
+                <div class="container-images">
+                    <img src="{% static 'img/bimota-lado.jpg' %}" alt="girl" class="sliderFerrari slider-all on">
+                    <img src="{% static 'img/bimota-atras.jpg' %}" alt="girl" class="sliderFerrari slider-all">
+                </div>
+                <button class="next-button" id="next-buttonFerrari"><img src="{% static 'img/arrow.png' %}"
+                        alt="next-button"></button>
+            </div>
+            <div class="lista-nome">
+                <h1 class="item-name">BIMOTA TESI 3D EVO</h1>
+            </div>
+            <br>
+            <br>
+            <h2 id="preço">R$ 250.000</h2>
+            <p id="ano">2012/2012 <span>105 Km</span></p>
+
+            <div class="botao"><a href="{% url 'Bimota' %}">Ver parcelas</a></div>
+
+            <div class="localizacao">
+                <i class="bi bi-geo-alt"></i>
+                <p id="city">Sao Paulo - SP</p>
+            </div>
+        </div>
+    </li>
+
+    <li class="cars Honda Novos LowToHigh">
+        <div class="carro-box">
+            <div class="container-slider">
+                <button class="prev-button" id="prev-buttontesla1"><img src="{% static 'img/arrow.png' %}"alt="prev-button"></button>
+                <div class="container-images">
+                    <img src="{% static 'img/honda-pop-lado.jpg' %}" alt="girl" class="slidertesla1 slider-all on">
+                    <img src="{% static 'img/honda-pop-atras.jpg' %}" alt="girl" class="slidertesla1 slider-all">
+                </div>
+                <button class="next-button" id="next-buttontesla1"><img src="{% static 'img/arrow.png' %}"alt="next-button"></button>
+            </div>
+            <div class="lista-nome">
+                <h1 class="item-name">HONDA POP 110i</h1>
+            </div>
+            <br>
+            <br>
+            <h2 id="preço">R$ 9.900</h2>
+            <p id="ano">2023/2023 <span>0 Km</span></p>
+    
+            <div class="botao"><a href="{% url 'POP' %}">Ver parcelas</a></div>
+    
+            <div class="localizacao">
+                <i class="bi bi-geo-alt"></i>
+                <p id="city">Diadema - SP</p>
+            </div>
+        </div>
+    </li>  
+</ul>
+{% endblock %}

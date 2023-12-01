@@ -1,0 +1,105 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block secao %}
+
+<div class="imgs-pegout">
+    <div class="slider-content">
+        <input type="radio" name="btn-radio" id="radio1">
+        <input type="radio" name="btn-radio" id="radio2">
+    
+        <div class="slider-box primeiro">
+            <img src="{% static 'img/yamaha-factor-frente.jpg' %}" alt="girl">
+        </div>
+    
+        <div class="slider-box">
+            <img src="{% static 'img/yamaha-factor-atras.jpg' %}" alt="girl">
+        </div>
+    
+        <div class="nav-auto">
+            <div class="auto-btn1"></div>
+            <div class="auto-btn2"></div>
+    
+        </div>
+    
+        <div class="nav-manual">
+            <label for="radio1" class="manual-btn"></label>
+            <label for="radio2" class="manual-btn"></label>
+    
+        </div>
+    </div>
+   
+    <div class="informacoes-container">
+
+        <div class="informacoes-box">
+            <div class="tille-car">
+                <h1>YAMAHA FACTOR <span> YBR 125I ED</span></h1>
+                <br>
+            </div>
+            <div class="informacoes-content">
+                <div class="card-car">
+                    <p>Cidade</p>
+                    <span>Sao Paulo - SP</span>
+                </div>
+
+                <div class="card-car">
+                    <p>Ano</p>
+                    <span>2023/2024</span>
+                </div>
+
+                <div class="card-car">
+                    <p>Km</p>
+                    <span>0 </span>
+                </div>
+
+                <div class="card-car">
+                    <p>Partida</p><span>elétrica</span>
+                </div>
+                <div class="card-car">
+                    <p>IPVA pago</p>
+                    <span>sim</span>
+                </div>
+                <div class="card-car">
+                    <p>Cilindrada</p>
+                    <span>125</span>
+                </div>
+                <div class="card-car">
+                    <p>Cor</p>
+                    <span>Preto/Vermelho</span>
+                </div>
+                <div class="card-car">
+                    <p>Aceita troca</p>
+                    <span>sim</span>
+                </div>
+                <div class="card-car">
+                    <p>Marchas</p>
+                    <span>5</span>
+                </div>
+                <div class="card-car">
+                    <p>Refrigeração</p>
+                    <span>ar</span>
+                </div>
+            </div>
+        </div>
+        <div class="informacoes-box2">
+            <h1>R$ 15.000</h1>
+            <span>Envie mensagem para o vendedor</span>
+
+            <form action="">
+                <div class="box2-inputs">
+                    {% if user.is_authenticated %}
+                    <input type="text" placeholder="Nome*" required>
+                    <input type="email" placeholder="E-mail*" required>
+                    <input type="text" placeholder="Telefone*" required>
+                    <textarea cols="30" rows="4" placeholder="Mensagem*" required></textarea>
+                    <button type="submit">Enviar</button>
+                    {% else %}
+                    <h1>Faça login para enviar a mensagem <a href="{% url 'login' %}">Login</a></h1>
+                    {% endif %}
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

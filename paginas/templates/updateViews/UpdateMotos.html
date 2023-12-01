@@ -1,0 +1,70 @@
+{% extends 'index.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block secao %}
+{% if user.is_authenticated %}
+<form action="" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="formulario-content">
+        <div class="formulario-box">
+            <h1 class="titulo-venda">Editar <i class="bi bi-pencil"></i></h1>
+            <p>Modelo <i class="bi bi-arrow-down-short"></i></p>
+            {{ form.modelo }}
+
+            <p>Descrição <i class="bi bi-arrow-down-short"></i></p>
+            {{ form.descricao }}
+
+            <p>Preço <i class="bi bi-arrow-down-short"></i></p>
+            {{ form.preco }}
+
+            <p>Ano <span>ex: 2020/2023</span><i class="bi bi-arrow-down-short"></i></p>
+            {{ form.data }}
+
+            <p>Quilometros <i class="bi bi-arrow-down-short"></i></p>
+            {{ form.km }}
+
+            <p>Cidade <i class="bi bi-arrow-down-short"></i></p>
+            {{ form.cidade }}
+
+            <p>Cor <i class="bi bi-arrow-down-short"></i></p>
+            {{ form.cor }}
+
+            <p>IPVA <i class="bi bi-arrow-down-short"></i></p>
+            {{ form.ipva }}
+
+            <p>Aceita troca <i class="bi bi-arrow-down-short"></i></p>
+            {{ form.troca }}
+
+            <p>Cilindrada <i class="bi bi-arrow-down-short"></i></p>
+            {{ form.Cilindrada }}
+
+            <p>Refrigeracao <i class="bi bi-arrow-down-short"></i></p>
+            {{ form.Refrigeracao }}
+
+            <p>Partida <i class="bi bi-arrow-down-short"></i></p>
+            {{ form.Partida }}
+
+            <p>marchas <i class="bi bi-arrow-down-short"></i></p>
+            {{ form.marchas}}
+
+            <button type="submit">Salvar</button>
+        </div>
+
+        <div class="form-mobile">
+            <div class="form-img">
+                <div class="img-car">
+                    <p>Imagem Nova</p>
+                    <div class="Botao-carro">
+                        {{ form.carro }}
+                        <i class="bi bi-file-earmark-plus-fill"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+{% else %}
+<h1 class="faca-login">faça o login para fazer uma venda <a href="{% url 'login' %}">Login</a></h1>
+{% endif %}
+{% endblock %}
