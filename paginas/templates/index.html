@@ -13,21 +13,20 @@
     <header class="header">
         <div class="logo"><h1>CarMaster</h1></div>
         <nav>
+            ### Menu desktop ###
             <a class="head car" href="#">Comprar</a>
             <a class="head shop" href="#">Vender</a>
             <a class="head profile" href="#">Perfil</a>
 
-            
+            #### opçoes do menu ####
             <div class="opcao-veiculo todos-links">
                 <a href="{% url 'index' %}"><i class="bi bi-car-front-fill"></i> Carros</a>
                 <a href="{% url 'motos' %}"><img class="icon" src="https://api.iconify.design/material-symbols:motorcycle.svg"> Motos</a>
             </div>
-
             <div class="opcao-vender todos-links">
                 <a href="{% url 'carro-create' %}"><i class="bi bi-car-front-fill"></i> Carros</a>
                 <a href="{% url 'moto-create' %}"><img class="icon" src="https://api.iconify.design/material-symbols:motorcycle.svg">Motos</a>
             </div>
-
             <div class="opcao-perfil todos-links">
                 {% if user.is_authenticated %}
                 <a href="{% url 'profile-update' %}"><i class="bi bi-pencil"></i> Meus dados</a>
@@ -37,7 +36,7 @@
                 {% endif %}
             </div>
             
-
+            ##### Menu mobile ####
             <div class="MenuMobile" id="MenuMobile">
                 <h1>compras</h1>
                 <a href="{% url 'index' %}">Comprar carros <i class="bi bi-car-front-fill"></i></a>
@@ -59,6 +58,7 @@
             </div>
         </nav>
 
+        ### opçoes do menu ###
         <div class="perfil">
             {% if user.is_authenticated %}
             <a class="user-profile" href="#"><i class="bi bi-person-circle"></i> {{ user }}</a>
@@ -68,7 +68,6 @@
             <div class="menu-hamburger" id="menu-hamburger">
                 <button><i class="bi bi-list"></i></button>
             </div>
-            
             <div class="opcao-logout">
                 <a href="{% url 'anuncio-carro' %}"><i class="bi bi-megaphone"></i> Meus anuncios/carros</a>
                 <a href="{% url 'anuncio-moto' %}"><i class="bi bi-megaphone"></i> Meus anuncios/motos</a>
@@ -76,8 +75,10 @@
             </div>
         </div>
     </header>
+    
     {% block secao %}
     <section id="home" class="home">
+        ### Filtro #
         <div class="filtro">
             <div class="x">X</div>
             <div class="links">
@@ -102,15 +103,19 @@
                 {% endblock %}
                 <div id="btns" class="marca-container">
                     {% block marca %}
+                    
+                    ### Filtro das marcas ###
+                    
                     <div class="marca-box">
                         <a class="lista list1" href="#" filterObjects="all"><i class="bi bi-car-front-fill"></i></a>
                         <p>Todos</p>
                     </div>
-
+                    
                     <div class="marca-box">
                         <a class="lista list2" href="#" filterObjects="Ford"><img src="{% static 'img/ford.png' %}" alt=""></a>
                         <p>Ford</p>
                     </div>
+                    
                     <div class="marca-box">
                         <a class="lista list3" href="#" filterObjects="Tesla"><img src="{% static 'img/tesla.png' %}" alt=""></a>
                         <p>Tesla</p>
@@ -145,9 +150,10 @@
                         <a class="lista list9" href="#" filterObjects="Chevrolet"><img src="{% static 'img/chevrolet.png' %}" alt=""></a>
                         <p>Chevrolet</p>
                     </div>
-
                     {% endblock %}
                 </div>
+
+                ### Filtro Por novos ou usados ###
                 <div class="mini-filtro">
                     <hr>
                     <br>
@@ -161,6 +167,7 @@
                 </div>
             </div>
         </div>
+        
         <div class="carros">
             <div class="busca">
                 <div class="filter"><i class="bi bi-funnel"></i> Filtro</div>
@@ -169,16 +176,18 @@
                     {% block input %}
                     <input id="inputBusca" type="text" placeholder="Digite modelo do carro" onkeyup="filtrar()">
                     {% endblock %}
-    
                     <a href="#" class="option-car" filterselect="all"> Todos</a>
                     <a href="#" class="option-car" filterselect="LowToHigh"> Menor preço</a>
                     <a href="#" class="option-car" filterselect="HighToLow">Maior preço</a> 
-                    
                 </div>
+
+                ### filtro Mobile ###
                 <div class="menu-hamburger2">
                     <a href="#">Pesquisar <i class="bi bi-arrow-down-short"></i></a>
                 </div>
             </div>
+
+            ### Lista de carros ###
             <div class="carro-container">
                 {% block paginas %}
                 <p>home  >  carro</p>
@@ -189,6 +198,8 @@
                 <div class="carro-content">
                     {% block veiculo %}
                     <ul id="lista-nao-ordenada" class="lista-nao-ordenada">
+
+                        ###### Lista dos veiculos que vai ser adicionado pelo usuario #######
                         {% for atividade in object_list %}
                         <li class="cars {{ atividade.marca }} {{ atividade.condicao }} {{ atividade.precoo }}">
                             <div class="carro-box">
@@ -203,8 +214,7 @@
                                     <h1 class="item-name">{{ atividade.modelo }}</h1>
                                 </div>
                                 <p class="descricao">{{ atividade.descricao }}</p>
-            
-                                <h2 id="preco1">R$ {{ atividade.preco }}</h2>
+                                <h2">R$ {{ atividade.preco }}</h2>
                                 <p id="ano">{{ atividade.data }} <span>{{ atividade.km }} Km</span></p>
                                 <p id="name-user">Nome do vendedor: {{ atividade.usuario }}</p>
                                 <div class="botao"><a href="{% url 'detail' atividade.id %}">Ver parcelas</a></div>
@@ -212,6 +222,7 @@
                             </div>
                         </li>
                         {% endfor %}
+                        
                         <li class="cars Peugeot Usados LowToHigh">
                             <div class="carro-box">
                                 <div class="container-slider">
@@ -227,17 +238,16 @@
                                     <h1 class="item-name">PEUGEOT 2008</h1>
                                 </div>
                                 <p class="descricao">1.6 16V FLEX ALLURE PACK 4P AUTOMÁTICO</p>
-                                <h2 id="preco1">R$ 74.900</h2>
+                                <h2>R$ 74.900</h2>
                                 <p id="ano">2022/2022  <span>44.825 Km</span></p>
-
                                 <div class="botao"><a href="{% url 'Peugeot' %}">Ver parcelas</a></div>
-
                                 <div class="localizacao">
                                     <i class="bi bi-geo-alt"></i>
                                     <p id="city">Sao paulo - SP</p>
                                 </div>
                             </div>
                         </li>
+                        
                         <li class="cars Ford SemiNovos HighToLow">
                             <div class="carro-box">
                                 <div class="container-slider">
@@ -253,17 +263,16 @@
                                     <h1 class="item-name ">FORD MUSTANG</h1>
                                 </div>
                                 <p class="descricao">5.0 V8 TI-VCT GASOLINA MACH 1 SELECTSHIFT</p>
-                                <h2 id="preco2">R$ 529.990</h2>
+                                <h2>R$ 529.990</h2>
                                 <p id="ano">2022/2022 <span>1.606 Km</span></p>
-                            
-                                <div class="botao"><a href="{% url 'Ford' %}">Ver parcelas</a></div>
-                            
+                                <div class="botao"><a href="{% url 'Ford' %}">Ver parcelas</a></div>      
                                 <div class="localizacao">
                                     <i class="bi bi-geo-alt"></i>
                                     <p id="city">Piracicaba - SP</p>
                                 </div>
                             </div>
                         </li>
+                        
                         <li class="cars Tesla SemiNovos HighToLow">
                             <div class="carro-box">
                                 <div class="container-slider">
@@ -279,11 +288,9 @@
                                     <h1 class="item-name ">TESLA MODEL S</h1>
                                 </div>
                                 <p class="descricao">ELÉTRICO PLAID, Automatico, cinza. Gasolina e elétrico</p>
-                                <h2 id="preco3">R$ 949.990</h2>
-                                <p id="ano">2021/2021 <span>1.600 Km</span></p>
-                            
-                                <div class="botao"><a href="{% url 'Tesla' %}">Ver parcelas</a></div>
-                            
+                                <h2>R$ 949.990</h2>
+                                <p id="ano">2021/2021 <span>1.600 Km</span></p>                         
+                                <div class="botao"><a href="{% url 'Tesla' %}">Ver parcelas</a></div>                    
                                 <div class="localizacao">
                                     <i class="bi bi-geo-alt"></i>
                                     <p id="city">Balneario Camboriu - SC</p>
@@ -304,13 +311,10 @@
                                 <div class="lista-nome">
                                     <h1 class="item-name">CHEVROLET JOY</h1>
                                 </div>
-                                <p class="descricao">1.0 SPE4 FLEX PLUS MANUAL</p>
-                
-                                <h2 id="preco8">R$ 67.800</h2>
-                                <p id="ano">2021/2021 <span>0 Km</span></p>
-                        
-                                <div class="botao"><a href="{% url 'chevrolet' %}">Ver parcelas</a></div>
-                        
+                                <p class="descricao">1.0 SPE4 FLEX PLUS MANUAL</p>               
+                                <h2>R$ 67.800</h2>
+                                <p id="ano">2021/2021 <span>0 Km</span></p>                      
+                                <div class="botao"><a href="{% url 'chevrolet' %}">Ver parcelas</a></div>                        
                                 <div class="localizacao">
                                     <i class="bi bi-geo-alt"></i>
                                     <p id="city">Blumenau - SC</p>
@@ -333,17 +337,16 @@
                                     <h1 class="item-name ">PORSCHE MACAN</h1>
                                 </div>
                                 <p class="descricao">3.0 S 24V V6 GASOLINA CINZA 4P AUTOMÁTICO</p>
-                                <h2 id="preco4">R$ 499.000</h2>
-                                <p id="ano">2021/2021 <span>19.058 Km</span></p>
-                            
-                                <div class="botao"><a href="{% url 'porsche' %}">Ver parcelas</a></div>
-                            
+                                <h2>R$ 499.000</h2>
+                                <p id="ano">2021/2021 <span>19.058 Km</span></p>                           
+                                <div class="botao"><a href="{% url 'porsche' %}">Ver parcelas</a></div>                       
                                 <div class="localizacao">
                                     <i class="bi bi-geo-alt"></i>
                                     <p id="city">Sao paulo - SP</p>
                                 </div>
                             </div>
                         </li>
+                        
                         <li class="cars Chevrolet Usados HighToLow">
                             <div class="carro-box">
                                 <div class="container-slider">
@@ -359,17 +362,16 @@
                                     <h1 class="item-name ">CHEVROLET CAMARO</h1>
                                 </div>
                                 <p class="descricao">6.2 V8 GASOLINA SS CONVERSÍVEL AUTOMÁTICO</p>
-                                <h2 id="preco5">R$ 369.900</h2>
-                                <p id="ano">2017/2017 <span>47.000 Km</span></p>
-                            
-                                <div class="botao"><a href="{% url 'camaro' %}">Ver parcelas</a></div>
-                            
+                                <h2>R$ 369.900</h2>
+                                <p id="ano">2017/2017 <span>47.000 Km</span></p>                            
+                                <div class="botao"><a href="{% url 'camaro' %}">Ver parcelas</a></div>                          
                                 <div class="localizacao">
                                     <i class="bi bi-geo-alt"></i>
                                     <p id="city">Taubate - SP</p>
                                 </div>
                             </div>
                         </li>
+                        
                         <li class="cars Lamborghini SemiNovos HighToLow">
                             <div class="carro-box">
                                 <div class="container-slider">
@@ -385,11 +387,9 @@
                                     <h1 class="item-name ">LAMBORGHINI HURACÁN</h1>
                                 </div>
                                 <p class="descricao">5.2 V10 LARANJA GASOLINA LP 640 STO LDF</p>
-                                <h2 id="preco6">R$ 4.999.990</h2>
-                                <p id="ano">2022/2022 <span>900 Km</span></p>
-                            
-                                <div class="botao"><a href="{% url 'Lamborghini' %}">Ver parcelas</a></div>
-                            
+                                <h2>R$ 4.999.990</h2>
+                                <p id="ano">2022/2022 <span>900 Km</span></p>                           
+                                <div class="botao"><a href="{% url 'Lamborghini' %}">Ver parcelas</a></div>                            
                                 <div class="localizacao">
                                     <i class="bi bi-geo-alt"></i>
                                     <p id="city">Brusque - SC</p>
@@ -400,25 +400,21 @@
                         <li class="cars Porsche Novos HighToLow">
                             <div class="carro-box">
                                 <div class="container-slider">
-                                    <button class="prev-button" id="prev-buttonPanamera"><img src="{% static 'img/arrow.png' %}"
-                                            alt="prev-button"></button>
+                                    <button class="prev-button" id="prev-buttonPanamera"><img src="{% static 'img/arrow.png' %}"alt="prev-button"></button>
                                     <div class="container-images">
                                         <img src="{% static 'img/porsche-panamera.jpg' %}" alt="girl" class="sliderPanamera slider-all on">
                                         <img src="{% static 'img/porsche-panamera-lado.jpg' %}" alt="girl" class="sliderPanamera slider-all">
                                         <img src="{% static 'img/porsche-panamera-atras.jpg' %}" alt="girl" class="sliderPanamera slider-all">
                                     </div>
-                                    <button class="next-button" id="next-buttonPanamera"><img src="{% static 'img/arrow.png' %}"
-                                            alt="next-button"></button>
+                                    <button class="next-button" id="next-buttonPanamera"><img src="{% static 'img/arrow.png' %}"alt="next-button"></button>
                                 </div>
                                 <div class="lista-nome">
                                     <h1 class="item-name">PORSCHE PANAMERA</h1>
                                 </div>
                                 <p class="descricao">2.9 V6 E-HYBRID 4S PDK AUTOMATICO BRANCA</p>
-                                <h2 id="preco8">R$ 907.917</h2>
-                                <p id="ano">2023/2023 <span>0 Km</span></p>
-                        
-                                <div class="botao"><a href="{% url 'Panamera' %}">Ver parcelas</a></div>
-                        
+                                <h2">R$ 907.917</h2>
+                                <p id="ano">2023/2023 <span>0 Km</span></p>                     
+                                <div class="botao"><a href="{% url 'Panamera' %}">Ver parcelas</a></div>                  
                                 <div class="localizacao">
                                     <i class="bi bi-geo-alt"></i>
                                     <p id="city">Rio de Janeiro - RJ</p>
@@ -441,17 +437,16 @@
                                     <h1 class="item-name">VOLKSWAGEN AMAROK</h1>
                                 </div>
                                 <p class="descricao">2.0 HIGHLINE 4X4 CD 16V TURBO INTERCOOLER DIESEL 4P AUTOMÁTICO</p>
-                                <h2 id="preco7">R$ 145.900</h2>
-                                <p id="ano">2017/2017 <span>80.968 Km</span></p>
-                            
-                                <div class="botao"><a href="{% url 'Volkswagen' %}">Ver parcelas</a></div>
-                            
+                                <h2>R$ 145.900</h2>
+                                <p id="ano">2017/2017 <span>80.968 Km</span></p>                           
+                                <div class="botao"><a href="{% url 'Volkswagen' %}">Ver parcelas</a></div>                       
                                 <div class="localizacao">
                                     <i class="bi bi-geo-alt"></i>
                                     <p id="city">Sao paulo - SP</p>
                                 </div>
                             </div>
                         </li>
+                        
                         <li class="cars Ferrari SemiNovos HighToLow">
                             <div class="carro-box">
                                 <div class="container-slider">
@@ -467,11 +462,9 @@
                                     <h1 class="item-name">FERRARI SF90</h1>
                                 </div>
                                 <p class="descricao">3.9 V8 TURBO GASOLINA E ELÉTRICO PHEV STRADALE F1-DCT</p>
-                                <h2 id="preco8">R$ 5.550.000</h2>
-                                <p id="ano">2021/2022 <span>161 Km</span></p>
-                            
-                                <div class="botao"><a href="{% url 'Ferrari' %}">Ver parcelas</a></div>
-                            
+                                <h2>R$ 5.550.000</h2>
+                                <p id="ano">2021/2022 <span>161 Km</span></p>                            
+                                <div class="botao"><a href="{% url 'Ferrari' %}">Ver parcelas</a></div>                         
                                 <div class="localizacao">
                                     <i class="bi bi-geo-alt"></i>
                                     <p id="city">Uberlandia - MG</p>
@@ -482,25 +475,21 @@
                         <li class="cars Volkswagen Novos LowToHigh">
                             <div class="carro-box">
                                 <div class="container-slider">
-                                    <button class="prev-button" id="prev-buttonVolkswagen"><img src="{% static 'img/arrow.png' %}"
-                                            alt="prev-button"></button>
+                                    <button class="prev-button" id="prev-buttonVolkswagen"><img src="{% static 'img/arrow.png' %}"alt="prev-button"></button>
                                     <div class="container-images">
                                         <img src="{% static 'img/volkswagen-gol-frente.jpg' %}" alt="girl" class="sliderVolkswagen slider-all on">
                                         <img src="{% static 'img/volkswagen-gol-lado.jpg' %}" alt="girl" class="sliderVolkswagen slider-all">
                                         <img src="{% static 'img/volkswagen-gol-atras.jpg' %}" alt="girl" class="sliderVolkswagen slider-all">
                                     </div>
-                                    <button class="next-button" id="next-buttonVolkswagen"><img src="{% static 'img/arrow.png' %}"
-                                            alt="next-button"></button>
+                                    <button class="next-button" id="next-buttonVolkswagen"><img src="{% static 'img/arrow.png' %}"alt="next-button"></button>
                                 </div>
                                 <div class="lista-nome">
                                     <h1 class="item-name">VOLKSWAGEN GOL</h1>
                                 </div>
                                 <p class="descricao">1.6 MSI TOTALFLEX 4P MANUAL</p>
-                                <h2 id="preco8">R$ 61.900</h2>
-                                <p id="ano">2021/2022 <span>0 Km</span></p>
-                        
-                                <div class="botao"><a href="{% url 'Gol' %}">Ver parcelas</a></div>
-                        
+                                <h2>R$ 61.900</h2>
+                                <p id="ano">2021/2022 <span>0 Km</span></p>                       
+                                <div class="botao"><a href="{% url 'Gol' %}">Ver parcelas</a></div>                       
                                 <div class="localizacao">
                                     <i class="bi bi-geo-alt"></i>
                                     <p id="city">Itarare - SP</p>
@@ -511,23 +500,20 @@
                         <li class="cars Tesla SemiNovos LowToHigh">
                             <div class="carro-box">
                                 <div class="container-slider">
-                                    <button class="prev-button" id="prev-buttontesla1"><img src="{% static 'img/arrow.png' %}"
-                                            alt="prev-button"></button>
+                                    <button class="prev-button" id="prev-buttontesla1"><img src="{% static 'img/arrow.png' %}"alt="prev-button"></button>
                                     <div class="container-images">
                                         <img src="{% static 'img/tesla-model-frente.jpg' %}" alt="girl" class="slidertesla1 slider-all on">
                                         <img src="{% static 'img/tesla-model-lado.jpg' %}" alt="girl" class="slidertesla1 slider-all">
                                         <img src="{% static 'img/tesla-model-atras.jpg' %}" alt="girl" class="slidertesla1 slider-all">
                                     </div>
-                                    <button class="next-button" id="next-buttontesla1"><img src="{% static 'img/arrow.png' %}"
-                                            alt="next-button"></button>
+                                    <button class="next-button" id="next-buttontesla1"><img src="{% static 'img/arrow.png' %}"alt="next-button"></button>
                                 </div>
                                 <div class="lista-nome">
                                     <h1 class="item-name">TESLA MODEL 3</h1>
                                 </div>
                                 <p class="descricao">ELÉTRICO AWD STANDARD RANGE PLUS</p>
-                                <h2 id="preco8">R$ 61.900</h2>
-                                <p id="ano">2022/2022 <span>2.130 Km</span></p>
-                        
+                                <h2>R$ 61.900</h2>
+                                <p id="ano">2022/2022 <span>2.130 Km</span></p>  
                                 <div class="botao"><a href="{% url 'Model' %}">Ver parcelas</a></div>
                                 <div class="localizacao">
                                     <i class="bi bi-geo-alt"></i>
@@ -543,16 +529,17 @@
     </section>
     {% endblock %}
 </body>
+    
 <script src="https://code.jquery.com/jquery-3.5.1.js"
 integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
 crossorigin="anonymous"></script>
-
 <script src="{% static 'js/pesquisa-veiculos.js' %}"></script>
 <script src="{% static 'js/slider-car.js' %}"></script>
 <script src="{% static 'js/pesquisa-filtro.js' %}"></script>
 <script src="{% static 'js/clickMenu.js' %}"></script>
 <script src="{% static 'js/jquery-3.7.1.min.js' %}"></script>
 <script src="{% static 'js/jquery.mask.js' %}"></script>
+    
 <script type="text/javascript">
     $(document).ready(function () {
         $('#id_data').mask('0000/0000');
@@ -564,6 +551,7 @@ crossorigin="anonymous"></script>
         $('#id_dataa').mask('00/00/0000');
     });
 </script>
+    
 <script type="text/javascript">
     $(document).ready(function () {
         $('.lista').click(function () {
@@ -608,6 +596,7 @@ crossorigin="anonymous"></script>
         })
     })
 </script>
+    
 <script src="{% static 'js/lateral-menu.js' %}"></script>
 <script src="{% static 'js/menu_form.js' %}"></script>
 <script src="{% static 'js/menu-perfil.js' %}"></script>
